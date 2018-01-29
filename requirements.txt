@@ -1,0 +1,10 @@
+Flask==0.9
+Jinja2==2.6
+Werkzeug==0.8.3
+wsgiref==0.1.2
+Khayyam==3.0.15
+telepot==10.4
+pillow==4.0.0
+requests==2.18.1
+Flask-SQLAlchemy==2.3.1
+psycopg2==2.7.3
