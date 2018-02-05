@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{{symbol}}</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8"> 
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+	<script>
+	$(document).ready(function() {
+    $('#example').DataTable();
+		} );
+	</script>
+	
+  </head>
+  <body>
+		<nav class="navbar navbar-default ">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					 <a class="navbar-brand" href="#">strix stock</a>
+				</div>
+				<ul class="nav navbar-nav navbar-right">
+					<li class="active"><a href="/">Home</a></li>
+
+				</ul>
+			</div>
+		</nav>
+		<div class="container">
+			<div class="well text-right">
+			  <h1>{{symbol}}</h1>      
+			  <p>{{name}}</p>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-3 well">
+					<div class="row">
+						<div class="col-xs-6 ">
+							<a class="btn btn-primary btn-block" href="/history/{{id}}" role="button">سابقه سهم</a>
+						</div>
+						<div class="col-xs-6">
+							<a class="btn btn-primary btn-block" href="/client_history/{{id}}" role="button">حقیقی - حقوقی</a>
+						</div>
+					</div>
+					<div class="row">
+						<h3 class="text-center">سایر سهم های گروه</h3>
+						<ul class="list-group">
+							{% for index, row in group_list.iterrows() %}
+								<a href="/stock/{{row['id']}}" class="list-group-item list-group-item-info">
+								  <h4 class="list-group-item-heading text-right">{{row['symbol']}}</h4>
+								  <p class="list-group-item-text">{{ "{0:,}".format(row['last_price']| int) }}: آخرین قیمت</p>
+								</a>
+							{% endfor %}
+						</ul>
+					</div>
+				</div>
+				<div class="col-xs-9">
+					<div class=" text-center">
+						<div class="row">
+							<div class="col-xs-6">
+								<table class="table well table-striped table-hover text-center table-condensed">
+									<thead >
+									<tr >
+									  <th class='text-center success'>تعداد معامله</th>
+									  <th class='text-center success'>حجم معاملات</th>
+									  <th class='text-center success'>ارزش معاملات</th>
+									</tr>
+									</thead>
+									<tbody>
+									  {% for index, row in general.iterrows() %}
+										  <tr> 
+												<td>{{ "{0:,}".format(row['count']| int)}}</td>
+												<td>{{"{0:,}".format(row['volume']| int) }}</td>
+												<td>{{"{0:,}".format(row['value']| int) }}</td>
+										  </tr>
+									  {% endfor %}
+									</tbody>
+								</table>
+							</div>
+							<div class="col-xs-6">
+								<table class="table well table-striped table-hover text-center table-condensed">
+									<thead >
+									<tr >
+									  <th class='text-center success'>آخرین معامله</th>
+									  <th class='text-center success'>آخرین قیمت</th>
+									  <th class='text-center success'>قیمت پایانی</th>
+									  <th class='text-center success'>اولین قیمت</th>
+									  <th class='text-center success'>قیمت دیروز</th>
+									</tr>
+									</thead>
+									<tbody>
+									  {% for index, row in general.iterrows() %}
+										  <tr> 
+												<td>{{row['last_tarde_time']}}</td>
+												<td class='text-center {{ 'bg-success' if (row['last_price']| int) >= (row['close_price']| int) else 'bg-danger' }}' >{{"{0:,}".format(row['last_price']| int) }}</td>
+												<td>{{"{0:,}".format(row['close_price']| int) }}</td>
+												<td>{{"{0:,}".format(row['first_price']| int) }}</td>
+												<td>{{"{0:,}".format(row['yesterday_price']| int) }}</td>
+										  </tr>
+									  {% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>	
+						<div class="row">
+							<div class="col-xs-9">
+							</div>
+							<div class="col-xs-3">
+								<table class="table well table-striped table-hover text-center table-condensed">
+									<thead >
+									<tr >
+									  <th class='text-center success'>بیشترین قیمت</th>
+									  <th class='text-center success'>کمترین قیمت</th>
+									</tr>
+									</thead>
+									<tbody>
+									  {% for index, row in general.iterrows() %}
+										  <tr> 
+												<td>{{"{0:,}".format(row['max_traded_price']| int) }}</td>
+												<td>{{"{0:,}".format(row['min_traded_price']| int)}}</td>
+										  </tr>
+									  {% endfor %}
+									</tbody>
+								</table>
+							</div>	
+
+						</div>						
+					</div>
+					<div class="col-xs-6">
+						<table class="table well table-striped text-center table-condensed">
+							  <thead >
+								<tr >
+								  <th class='text-center success'>تعداد</th>
+								  <th class='text-center success'>حجم</th>
+								  <th class='text-center success'>خرید</th>
+								  <th class='text-center danger'>فروش</th>
+								  <th class='text-center danger'>حجم</th>
+								  <th class='text-center danger'>تعداد</th>
+								</tr>
+							  </thead>
+							  <tbody>
+								  {% for index, row in saf.iterrows() %}
+									  <tr> 
+											<td>{{row['buy_count']}}</td>
+											<td>{{"{0:,}".format(row['buy_volume']| int) }}</td>
+											<td>{{"{0:,}".format(row['buy_price']| int) }}</td>
+											<td>{{"{0:,}".format(row['sell_price']| int) }}</td>
+											<td>{{"{0:,}".format(row['sell_volume']| int) }}</td>
+											<td>{{row['sell_count']}}</td>
+									  </tr>
+								  {% endfor %}
+							  </tbody>
+						</table>
+					</div>
+					<div class="col-xs-6 well">
+						<img src="data:image/png;base64, {{ day_plot }}" class='img-rounded' width=100%>
+						<table id="example" class="table  well table-striped table-hover text-center table-condensed">
+							<thead >
+							<tr >
+							  <th class='text-center success'>ساعت</th>
+							  <th class='text-center success'>بیشترین قیمت</th>
+							  <th class='text-center success'>کمترین قیمت</th>
+							  <th class='text-center success'>قیمت شروع</th>
+							  <th class='text-center success'>قیمت پایانی</th>
+							  <th class='text-center success'>حجم معامله</th>
+							</tr>
+							</thead>
+							<tbody>
+							  {% for index, row in day_price_list.iterrows() %}
+								  <tr> 
+										<td>{{row['time'].time()}}</td>
+										<td>{{"{0:,}".format(row['high_price']| int) }}</td>
+										<td>{{"{0:,}".format(row['low_price']| int) }}</td>
+										<td>{{"{0:,}".format(row['open_price']| int) }}</td>
+										<td>{{"{0:,}".format(row['close_price']| int) }}</td>
+										<td>{{"{0:,}".format(row['volume']| int) }}</td>
+								  </tr>
+							  {% endfor %}
+							</tbody>
+						</table>		
+					</div>
+			</div>
+		</div>
+	</body>
+  
+</html>

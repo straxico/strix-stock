@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>strix</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8"> 
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+	<script>
+	$(document).ready(function() {
+    $('#market').DataTable();
+		} );
+	</script>
+	
+  </head>
+  <body>
+		<nav class="navbar navbar-default ">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					 <a class="navbar-brand" href="#">strix stock</a>
+				</div>
+				<ul class="nav navbar-nav navbar-right">
+					<li class="active"><a href="/">Home</a></li>
+				</ul>
+			</div>
+		</nav>
+		<div class="container">
+			<div class="well">
+			  <img src="straxico.jpg" class="img-rounded" alt="Cinque Terre" width="100" height="100"> 
+			  <h1>My First Bootstrap Page</h1>      
+			  <p>This part is inside a .container-fluid class.</p>
+			</div>
+		</div>
+		<div class="container">
+			<table id="market" class="table  well table-striped table-hover text-center table-condensed">
+					<thead >
+					<tr >
+					  <th class='text-center success'>تاریخ</th>
+					  <th class='text-center success'>تعداد خرید حقیقی</th>		
+					  <th class='text-center success'>تعداد خرید حقوقی</th>
+					  <th class='text-center success'>تعداد فروش حقیقی</th>
+					  <th class='text-center success'>تعداد فروش حقوقی</th>
+					  <th class='text-center success'>حجم خرید حقیقی</th>
+					  <th class='text-center success'>حجم خرید حقوقی</th>				
+					  <th class='text-center success'>حجم فروش حقیقی</th>		
+					  <th class='text-center success'>حجم فروش حقوقی</th>
+					  <th class='text-center success'>ارزش خرید حقیقی</th>
+					  <th class='text-center success'>ارزش خرید حقوقی</th>
+					  <th class='text-center success'>ارزش فروش حقیقی</th>
+					  <th class='text-center success'>ارزش فروش حقوقی</th>				
+					</tr>
+					</thead>
+					<tbody>
+					  {% for index, row in hist.iterrows() %}
+						  <tr> 
+						  
+								<td>{{row['date']}}</td>
+								<td>{{row['haghighi_buy_count']}}</td>
+								<td>{{row['hoghughi_buy_count']}}</td>
+								<td>{{row['haghighi_sell_count']}}</td>
+								<td>{{row['hoghughi_sell_count']}}</td>
+								<td>{{row['haghighi_buy_volume']}}</td>
+								<td>{{row['hoghughi_buy_volume']}}</td>
+								<td>{{row['haghighi_sell_volume']}}</td>
+								<td>{{row['hoghughi_sell_volume']}}</td>
+								<td>{{row['haghighi_buy_value']}}</td>
+								<td>{{row['hoghughi_buy_value']}}</td>
+								<td>{{row['haghighi_sell_value']}}</td>
+								<td>{{row['hoghughi_sell_value']}}</td>
+
+						  </tr>
+					  {% endfor %}
+					</tbody>
+				</table>
+		</div>
+	</body>
+  
+</html>

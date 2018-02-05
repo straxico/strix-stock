@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>strix stock</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8"> 
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+	<script>
+	$(document).ready(function() {
+    $('#market').DataTable();
+		} );
+	</script>
+	
+  </head>
+  <body>
+		<nav class="navbar navbar-default ">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					 <a class="navbar-brand" href="#">strix stock</a>
+				</div>
+				<ul class="nav navbar-nav navbar-right">
+					<li class="active"><a href="/">Home</a></li>
+				</ul>
+			</div>
+		</nav>
+		<div class="container">
+			<div class="well">
+			  <h1>strix stock market watch</h1>      
+			</div>
+		</div>
+		<div class="container">
+			<table id="market" class="table  well table-striped table-hover text-center table-condensed">
+					<thead >
+					<tr >
+					  <th class='text-center success'>نماد</th>
+					  <th class='text-center success'>تعداد معامله</th>
+					  <th class='text-center success'>حجم معامله</th>
+					  <th class='text-center success'>قیمت پایانی</th>
+					  <th class='text-center success'>درصد تغییر پایانی</th>
+					  <th class='text-center success'>آخرین قیمت</th>
+					  <th class='text-center success'>درصد تغییر آخرین</th>
+					  <th class='text-center success'>گروه</th>
+					</tr>
+					</thead>
+					<tbody>
+					  {% for index, row in market.iterrows() %}
+					      {% if (row['group_id']|int not in [68,44,23,27,64,69,56,11,13,59,45,42,34]) %}
+						  <tr> 
+						  
+								<td><a href="stock/{{row['id']}}">{{row['symbol']}}</a></td>
+								<td>{{row['count']}}</td>
+								<td>{{"{0:,}".format(row['volume']| int) }}</td>
+								<td>{{"{0:,}".format(row['close_price']| int)}}</td>
+							    <td>{{"{0:,}".format(((row['close_price']| int - row['yesterday_price']| int)/(row['yesterday_price']| int )*10000)|int / 100)}}</td>
+								<td>{{"{0:,}".format(row['last_price']| int)}}</td>
+					            <td>{{"{0:,}".format(((row['last_price']| int - row['yesterday_price']| int)/(row['yesterday_price']| int )*10000)|int / 100)}}</td>
+								<td>{{row['group_id']}}</td>
+						  </tr>
+						  {% endif %}
+					  {% endfor %}
+					</tbody>
+				</table>
+		</div>
+	</body>
+  
+</html>

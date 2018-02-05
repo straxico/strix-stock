@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>strix</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8"> 
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+	<script>
+	$(document).ready(function() {
+    $('#market').DataTable({
+	scrollY: 1500,
+	stateSave: true,
+	pageLength: 100,
+	lengthMenu: [ 10, 25, 50, 75, 100,500,1000,2000 ],
+	order:  [[ 0, 'asc' ]]
+	});
+		} );
+	</script>
+	
+  </head>
+  <body>
+		<nav class="navbar navbar-default ">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					 <a class="navbar-brand" href="#">strix stock</a>
+				</div>
+				<ul class="nav navbar-nav navbar-right">
+					<li class="active"><a href="/">Home</a></li>
+				</ul>
+			</div>
+		</nav>
+		<div class="container">
+			<div class="well">
+			  <h1>{{symbol}}</h1>			  
+			  <p>سابقه معاملات</p>
+			</div>
+		</div>
+		<div class="container">
+			<table id="market" class="table  well table-striped table-hover text-center table-condensed">
+					<thead >
+					<tr >
+					  <th class='text-center success'>تاریخ</th>
+					  <th class='text-center success'>بیشترین قیمت</th>
+					  <th class='text-center success'>کمترین قیمت</th>
+					  <th class='text-center success'>اولین قیمت</th>
+					  <th class='text-center success'>قیمت پایانی</th>
+					  <th class='text-center success'>آخرین قیمت</th>
+					  <th class='text-center success'>قیمت دیروز</th>
+					  <th class='text-center success'>ارزش معاملات</th>
+					  <th class='text-center success'>حجم معاملات</th>
+					  <th class='text-center success'>تعداد معاملات</th>
+					  <th class='text-center success'>cci 20</th>
+
+					</tr>
+					</thead>
+					<tbody>
+					  {% for index, row in hist.iterrows() %}
+						  <tr> 
+						  
+								<td>{{row['date']}}</td>
+								<td>{{row['max_price']}}</td>
+								<td>{{row['min_price']}}</td>
+								<td>{{row['first_price']}}</td>
+								<td>{{row['close_price']}}</td>
+								<td>{{row['last_price']}}</td>
+								<td>{{row['yesterday_price']}}</td>
+								<td>{{row['value']}}</td>
+								<td>{{row['volume']}}</td>
+								<td>{{row['count']}}</td>
+								<td>{{"{0:,}".format(row['cci20']| int) }}</td>
+						  </tr>
+					  {% endfor %}
+					</tbody>
+				</table>
+		</div>
+	</body>
+  
+</html>
