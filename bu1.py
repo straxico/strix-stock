@@ -9,6 +9,10 @@ market_np=np.empty((0,22))
 for i in market:
     market_np=np.concatenate((market_np,np.array([list(market[i].values())])))
 market_pd=pd.DataFrame(market_np,columns=list(market[i].keys()))
+def CCI(close, high, low, n, constant): 
+     TP = (high + low + close) / 3 
+     CCI = pd.Series((TP - TP.rolling(n).mean()) / (constant * TP.rolling(n).std()), name = 'CCI_' + str(n)) 
+     return CCI
 
 def all_data(id):
     all_data={}
@@ -63,7 +67,16 @@ def history_pd(id):
     history_np=np.empty((0,10))
     for i in hist:
         history_np=np.concatenate((history_np,np.array([list(i.values())])))
+    history_np[:,1:]=history_np[:,1:].astype(float)
     history_pd=pd.DataFrame(history_np,columns=list(hist[1].keys()))
+    history_pd.iloc[:,1:]= history_pd.iloc[:,1:].astype(float)
+    history_pd.iloc[:,1:]= history_pd.iloc[:,1:].astype(np.int64)
+    history_pd=history_pd.iloc[::-1]
+    TP = (history_pd['max_price'] + history_pd['min_price'] + history_pd['close_price']) / 3 
+    n=20
+    constant=0.015
+    history_pd['cci20'] = pd.Series((TP - TP.rolling(n).mean()) / (constant * TP.rolling(n).std()), name = 'CCI_' + str(n)) 
+    history_pd=history_pd.iloc[::-1]
     return history_pd
 def client_history_pd(id):
     client_hist=burs.get_clienttype_history(int(id))
