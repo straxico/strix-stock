@@ -2,6 +2,8 @@ import requests
 import burs
 import pandas as pd
 import numpy as np
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import matplotlib.finance as pltfinance
 market=burs.market()
