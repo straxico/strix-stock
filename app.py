@@ -1,6 +1,6 @@
 import os
 from flask import Flask, render_template
-import bu1,burs
+import bu1,burs,root
 from io import BytesIO
 import base64
 import pandas as pd
@@ -8,6 +8,11 @@ import pandas as pd
 app = Flask(__name__)
 
 @app.route("/")
+def hi():
+    data=root.root()
+    return render_template("root.html",data=data,strix='Flask Bootstrap Table')
+
+@app.route("/market")
 def hello():
     market=bu1.market_pd
     return render_template("index.html",market=market,strix='Flask Bootstrap Table')
@@ -28,7 +33,7 @@ def stosk_view(id):
     bio = BytesIO()
     bio.name = 'image.png'
     plt.savefig(bio, format='png')
-    bio.seek(0)    
+    bio.seek(0)
     day_plot = base64.b64encode(bio.getvalue()).decode()
     return render_template("stock.html", id=id,name=name ,symbol=symbol,group_list=group_list,saf=saf,general=general,day_price_list=day_price_list,day_plot=day_plot)
 
