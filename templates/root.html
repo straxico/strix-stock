@@ -2,22 +2,23 @@
 <html lang="en">
   <head>
     <title>strix stock</title>
+	<link rel="shortcut icon" type="image/png" href="http://www.cutmypic.com/uploads/title287502245.png"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
 	<style>
 
 	.text1 {
-  font-size: calc(   1.6vw);
+  font-size: calc(   1.4vw + 1.4vh );
 }
 
 .text2 {
-  font-size: calc( 2vw );
+  font-size: calc( 1.6vw + 1.6vh );
 }
 
 .text3 {
-  font-size: calc( 1vw );
+  font-size: calc( 1.4vw + 1.4vh );
 }
-	
+
 	</style>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
@@ -34,7 +35,7 @@
         </ul>
     </nav>
 	<div class="container-floud p-4">
-	<div class="card-deck">
+	<div class="card-columns">
 		<div class="card bg-success">
 			<div class="card-header bg-success text-center">USD</div>
 			<div class="card-body">
@@ -47,7 +48,7 @@
 						</div>
 					</div>
 				</div>
-				
+
 				<div class="row">
 					<div class="col-4"><h3 class="text1">Sell </h3></div>
 					<div class="col-8">
@@ -56,10 +57,23 @@
 						<p> IRR</p>
 						</div>
 					</div>
-				</div>			
+				</div>
 			</div>
 		</div>
-	
+    <div class="card bg-info">
+			<div class="card-header text-center">Tsetmc</div>
+			<div class="card-body">
+				<div class="row">
+					<div class="col-4"><h3 class="text1">Index</h3></div>
+					<div class="col-8">
+					<div class="row">
+						<h2 class="text2">{{data['shakhes']}}</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<div class="card bg-warning">
 			<div class="card-header bg-warning text-center ">BTC</div>
 			<div class="card-body">
@@ -70,15 +84,15 @@
 						<h2 class="text2">{{data['btcprice']}}</h2>
 						<p> $</p>
 						</div>
-						
+
 					</div>
-				</div>	
+				</div>
 				<div class="row">
 					<div class="col-5"><h4 class="text1">24h Vol</h4></div>
 					<div class="col-7">
 					<div class="row text-left">
 						<h2 class="text2">{{data['cryptovol']}}</h2>
-						<p>BTC</p>
+						<p>B$</p>
 						</div>
 					</div>
 				</div>
@@ -87,7 +101,7 @@
 					<div class="col-7">
 					<div class="row text-left">
 						<h2 class="text2">{{data['cryptocap']}}</h2>
-						<p>BTC</p>
+						<p>B$</p>
 						</div>
 					</div>
 				</div>
@@ -109,7 +123,7 @@
 
 			</div>
 		</div>
-		
+
 		<div class="card bg-primary">
 			<div class="card-header bg-primary text-center">Exir</div>
 			<div class="card-body">
@@ -122,6 +136,15 @@
 					</div>
 					</div>
 				</div>
+        <div class="row">
+					<div class="col-5"><h3 class="text1">calc Price </h3></div>
+					<div class="col-7">
+					<div class="row">
+					<h2 class="text2">{{data['calclast']}}</h2>
+					<p> IRR</p>
+					</div>
+					</div>
+				</div>
 				<div class="row">
 					<div class="col-5"><h3 class="text1">24h Vol </h3></div>
 					<div class="col-7">
@@ -129,6 +152,19 @@
 					<h2 class="text2">{{data['exirvol']}}</h2>
 					<p> BTC</p>
 					</div>
+					</div>
+				</div>
+			</div>
+		</div>
+    <div class="card bg-danger">
+			<div class="card-header text-center">StrixDays</div>
+			<div class="card-body">
+				<div class="row">
+					<div class="col-4"><h3 class="text1">straxico</h3></div>
+					<div class="col-8">
+					<div class="row">
+						<h2 class="text2">{{data['strixold']}}</h2>
+						</div>
 					</div>
 				</div>
 			</div>
