@@ -5,6 +5,7 @@ Created on Fri Nov 30 12:55:57 2018
 @author: strix
 """
 
+import datetime
 import requests
 import pandas as pd
 from bs4 import BeautifulSoup
@@ -13,7 +14,7 @@ def root():
     bitcoinmarket = pd.DataFrame(requests.get('https://api.coinmarketcap.com/v2/ticker/1/').json()['data']['quotes'])
     dolarsell=BeautifulSoup(requests.get('https://www.bonbast.com').text ,features="html.parser").find(id="usd1").text
     dolarbuy=BeautifulSoup(requests.get('https://www.bonbast.com').text ,features="html.parser").find(id="usd2").text
-
+    tsetmc= requests.get("http://tse.ir/json/HomePage/nazerMSG.json").json()['miniSlider']
     exirbtc = requests.get("https://api.exir.tech/v0/ticker?symbol=btc-tmn").json()
     rootdata={"dolarsell":format(int(dolarsell),',d'),
               "dolarbuy":format(int(dolarbuy), ',d'),
@@ -23,8 +24,11 @@ def root():
               "btc1h":bitcoinmarket['USD']['percent_change_1h'],
               "btc24h":bitcoinmarket['USD']['percent_change_24h'],
               "btc7d":bitcoinmarket['USD']['percent_change_7d'],
-              "cryptocap":format(int(cryptomarket["BTC"]["total_market_cap"]), ',d'),
-              "cryptovol":format(int(cryptomarket["BTC"]["total_volume_24h"]), ',d'),
+              "cryptocap":format(int(cryptomarket["USD"]["total_market_cap"] /1000000000), ',d'),
+              "cryptovol":format(int(cryptomarket["USD"]["total_volume_24h"] /1000000000), ',d'),
+              "shakhes":format(int(tsetmc[0]), ',d'),
+              "calclast":format(int(dolarsell)*int(bitcoinmarket['USD']['price']),',d'),
+              "strixold":(datetime.date.today() - datetime.date(1994, 3, 3)).days,
               }
     return rootdata
 

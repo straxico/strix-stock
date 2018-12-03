@@ -124,6 +124,7 @@ def get_dayinfo(id):
     return info
 
 #..................
+#http://www.tsetmc.com/tsev2/data/instinfodata.aspx?i=55254206302462116&c=72+
 #...............................................
 #url3='http://www.tsetmc.com/tsev2/data/instValue.aspx?i=55254206302462116&t=i'
 #data3=requests.get(url3)
@@ -152,15 +153,3 @@ def get_dayinfo(id):
 #url11='http://www.tsetmc.com/tsev2/chart/data/Index.aspx?i=32097828799138957&t=value'
 ##..........................................
 ##..........................................
-
-
-
-
-
-
-
-
-
-
-
-
