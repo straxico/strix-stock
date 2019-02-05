@@ -6,6 +6,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import matplotlib.finance as pltfinance
+
 market=burs.market()
 market_np=np.empty((0,22))
 for i in market:
@@ -80,6 +81,7 @@ def history_pd(id):
     history_pd['cci20'] = pd.Series((TP - TP.rolling(n).mean()) / (constant * TP.rolling(n).std()), name = 'CCI_' + str(n)) 
     history_pd=history_pd.iloc[::-1]
     return history_pd
+
 def client_history_pd(id):
     client_hist=burs.get_clienttype_history(int(id))
     client_history_np=np.empty((0,13))
