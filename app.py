@@ -1,9 +1,13 @@
 import os
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 import bu1,burs,root
 from io import BytesIO
 import base64
+import json
 import pandas as pd
+import exir
+import trade
+token ="1111111111111111111"
 
 app = Flask(__name__)
 
@@ -11,6 +15,94 @@ app = Flask(__name__)
 def hi():
     data=root.root()
     return render_template("root.html",data=data,strix='Flask Bootstrap Table')
+
+
+@app.route("/change")
+def ex():
+    data=[]
+    return render_template("exir.html",data=data,strix='Flask Bootstrap Table')
+
+
+
+@app.route("/change/ticker")
+def ex1():
+    data=exir.ticker()
+    return json.dumps(data)
+
+@app.route("/change/orderbook")
+def ex2():
+    data=exir.orderbook()
+    return json.dumps(data)
+
+@app.route("/change/tradebook")
+def ex3():
+    data=exir.tradebook()
+    return json.dumps(data)
+
+@app.route("/change/user")
+def ex4():
+    data=exir.user(token)
+    return json.dumps(data)
+
+@app.route("/change/balance")
+def ex5():
+    data=exir.balance(token)
+    return json.dumps(data)
+
+@app.route("/change/mytrades")
+def ex6():
+    data=exir.mytrades(token)
+    return json.dumps(data)
+
+@app.route("/change/myorders")
+def ex7():
+    data=exir.myorders(token)
+    return json.dumps(data)
+
+@app.route("/change/root")
+def ex8():
+    data=root.root()
+    return json.dumps(data)
+
+@app.route("/change/buy/<int:price>")
+def ex9(price):
+    if (price<45000000 and price>35000000):
+        data=exir.buybtc(token,0.0003,price)
+    return json.dumps(data)
+
+@app.route("/change/sell/<int:price>")
+def ex10(price):
+    if (price<45000000 and price>35000000):
+        data=exir.sellbtc(token,0.0003,price)
+    return json.dumps(data)
+
+@app.route("/change/delbtc")
+def ex11():
+    data=exir.delbtc(token)
+    return json.dumps(data)
+
+@app.route("/change/trade")
+def ex12():
+    data=trade.trade(token)
+    return str(data)
+
+
+
+@app.route("/plot")
+def hiplot():
+    data=root.root()
+    return render_template("plot.html",data=data,strix='Flask Bootstrap Table')
+
+@app.route("/bitchart")
+def go():
+    data=root.bitchart()
+    a=[data['time'].tolist(),data['exir'].tolist(),data['calc'].tolist()]
+    return json.dumps(a)
+@app.route("/savebitchart")
+def gos():
+    data=root.savebitchart()
+    a=[data['time'].tolist(),data['exir'].tolist(),data['calc'].tolist()]
+    return json.dumps(a)
 
 @app.route("/market")
 def hello():
