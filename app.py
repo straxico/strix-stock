@@ -7,7 +7,7 @@ import json
 import pandas as pd
 import exir
 import trade
-token ="1111111111111111111"
+token ="1111111111111111111111"
 
 app = Flask(__name__)
 
@@ -66,14 +66,14 @@ def ex8():
 
 @app.route("/change/buy/<int:price>")
 def ex9(price):
-    if (price<45000000 and price>35000000):
-        data=exir.buybtc(token,0.0003,price)
+    if (price<50000000 and price>35000000):
+        data=exir.buybtc(token,0.0006,price)
     return json.dumps(data)
 
 @app.route("/change/sell/<int:price>")
 def ex10(price):
-    if (price<45000000 and price>35000000):
-        data=exir.sellbtc(token,0.0003,price)
+    if (price<50000000 and price>35000000):
+        data=exir.sellbtc(token,0.0006,price)
     return json.dumps(data)
 
 @app.route("/change/delbtc")

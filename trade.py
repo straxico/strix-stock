@@ -34,13 +34,13 @@ def trade(token):
                     if(rootdata["btc1h"]> (-0.5) ):
                         ans.append("btc1h > 0")
                         price=sec_bids+50000
-                        req=requests.get('http://bit.tyto.ir/change/buy/'+str(price))
+                        req=requests.get('http://bit.tyto.ir/change/buy/'+str(int(price)))
                         ans.append(req)
                         ans.append("buy order at"+str(price))
 
         if (last_trade['side']=='buy'):
-            price=max(first_asks-50000,mytrades['data'][1]['price']*1.01)
-            req=requests.get('http://bit.tyto.ir/change/sell/'+str(price))
+            price=max(first_asks-50000,int((mytrades['data'][0]['price']*1.01)/50000+1)*50000 )
+            req=requests.get('http://bit.tyto.ir/change/sell/'+str(int(price)))
             ans.append(req)
             ans.append("sell order at"+str(price))
 
@@ -53,14 +53,14 @@ def trade(token):
                     req=requests.get('http://bit.tyto.ir/change/delbtc')
                     ans.append(req)
                     price=sec_bids+50000
-                    req=requests.get('http://bit.tyto.ir/change/buy/'+str(price))
+                    req=requests.get('http://bit.tyto.ir/change/buy/'+str(int(price)))
                     ans.append(req)
                     ans.append('del and set buy order at' +str(price))
                 if(sec_bids+100000<myorders[0]['price']):
                     req=requests.get('http://bit.tyto.ir/change/delbtc')
                     ans.append(req)
                     price=sec_bids+50000
-                    req=requests.get('http://bit.tyto.ir/change/buy/'+str(price))
+                    req=requests.get('http://bit.tyto.ir/change/buy/'+str(int(price)))
                     ans.append(req)
                     ans.append('del and set buy order at' +str(price))
             else:
@@ -73,7 +73,7 @@ def trade(token):
                 price=max(sec_asks-50000,int((mytrades['data'][0]['price']*1.01)/50000+1)*50000)
                 req=requests.get('http://bit.tyto.ir/change/delbtc')
                 ans.append(req)
-                req=requests.get('http://bit.tyto.ir/change/sell/'+str(price))
+                req=requests.get('http://bit.tyto.ir/change/sell/'+str(int(price)))
                 ans.append(req)
                 ans.append('del and set sell order at' +str(price))
 
@@ -81,7 +81,7 @@ def trade(token):
                 price=max(sec_asks-50000,int((mytrades['data'][0]['price']*1.01)/50000+1)*50000)
                 req=requests.get('http://bit.tyto.ir/change/delbtc')
                 ans.append(req)
-                req=requests.get('http://bit.tyto.ir/change/sell/'+str(price))
+                req=requests.get('http://bit.tyto.ir/change/sell/'+str(int(price)))
                 ans.append(req)
                 ans.append('del and set sell order at' +str(price))
     return ans
