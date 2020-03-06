@@ -1,10 +1,5 @@
 Flask>=0.12.2
-pillow>=4.0.0
 requests>=2.18.1
-Flask-SQLAlchemy>=2.3.1
-psycopg2>=2.7.3
 pandas>=0.19.1
 numpy>=1.11.3
-matplotlib==2.0.0
-beautifulsoup4==4.5.3
 

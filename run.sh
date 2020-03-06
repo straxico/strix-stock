@@ -1,2 +1,2 @@
 #!/bin/bash
-python app.py
+python ./src/app.py

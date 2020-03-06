@@ -1,6 +1,4 @@
 import requests
-import exir
-import root
 
 #read or save token
 #you can get your token from exir.io
