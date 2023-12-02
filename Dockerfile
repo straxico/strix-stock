@@ -1,4 +1,4 @@
-FROM python:3.7
+FROM python:3.13.0a1
 RUN mkdir /code
 WORKDIR /code
 ADD requirements.txt /code/
