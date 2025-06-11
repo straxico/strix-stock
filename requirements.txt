@@ -1,5 +1,5 @@
 Flask>=0.12.2
-requests>=2.18.1
+requests>=2.32.4
 pandas>=0.19.1
 numpy>=1.11.3
 
