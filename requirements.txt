@@ -3,3 +3,5 @@ requests>=2.18.1
 pandas>=0.19.1
 numpy>=1.11.3
 
+urllib3>=2.6.3 # not directly required, pinned by Snyk to avoid a vulnerability
+werkzeug>=3.1.5 # not directly required, pinned by Snyk to avoid a vulnerability
